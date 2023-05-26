@@ -1,12 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Hello </h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<img src="{% static 'img/1.jpg' %}" alt="">
+<br>
+<br>
+<br>
+<br>
+
+<form action="{% url 'thanks_page' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send</button>
+</form>
+
+<br>
+<br>
+<br>
+<br>
+
+{% if object_list %}
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td>DAte</td>
+        <td>Name</td>
+        <td>Phone</td>
+    </tr>
+    {% for obj in object_list %}
+    <tr>
+        <th>{{ obj.id }}</th>
+        <th>{{ obj.order_dt }}</th>
+        <th>{{ obj.order_name }}</th>
+        <th>{{ obj.order_phone }}</th>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}
